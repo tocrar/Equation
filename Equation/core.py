@@ -9,7 +9,7 @@
 #       http://www.alphaomega-technology.com.au/license/AOT-OL/1.0
 #==============================================================================
 
-from __future__ import print_function
+
 
 import math
 
@@ -18,7 +18,7 @@ import re
 
 if sys.version_info >= (3,):
     xrange = range
-    basestring = str
+    str = str
 
 class ExpressionObject (object):
     def __init__(self,*args,**kwargs):
@@ -44,7 +44,7 @@ class ExpressionValue( ExpressionObject ):
             E = [0,0]
             B = [0,0]
             out = ["",""]
-            for i in xrange(2):
+            for i in range(2):
                 if V[i] == 0:
                     E[i] = 0
                     B[i] = 0
@@ -120,7 +120,7 @@ class ExpressionFunction( ExpressionObject ):
 
     def toStr(self,args,expression):
         params = []
-        for i in xrange(self.nargs):
+        for i in range(self.nargs):
             params.append(args.pop())
         if self.isfunc:
             return str(self.display.format(','.join(params[::-1])))
@@ -129,7 +129,7 @@ class ExpressionFunction( ExpressionObject ):
 
     def toRepr(self,args,expression):
         params = []
-        for i in xrange(self.nargs):
+        for i in range(self.nargs):
             params.append(args.pop())
         if self.isfunc:
             return str(self.form.format(','.join(params[::-1])))
@@ -138,7 +138,7 @@ class ExpressionFunction( ExpressionObject ):
 
     def __call__(self,args,expression):
         params = []
-        for i in xrange(self.nargs):
+        for i in range(self.nargs):
             params.append(args.pop())
         return self.function(*params[::-1])
 
@@ -280,7 +280,7 @@ class Expression( object ):
         if len(args) > len(self.__args):
             raise TypeError("<{0:s}.{1:s}({2:s}) object at {3:0=#10x}>() takes at most {4:d} arguments ({5:d} given)".format(
                     type(self).__module__,type(self).__name__,repr(self),id(self),len(self.__args),len(args)))
-        for i in xrange(len(args)):
+        for i in range(len(args)):
             if i < len(self.__args):
                 if self.__args[i] in kwargs:
                     raise TypeError("<{0:s}.{1:s}({2:s}) object at {3:0=#10x}>() got multiple values for keyword argument '{4:s}'".format(
@@ -433,14 +433,14 @@ class Expression( object ):
             raise TypeError("{0:s} is not an {1:s} Object, and can't be compared to an Expression Object".format(repr(other), type(other)))
 
     def __combine(self,other,op):
-        if op not in ops or not isinstance(other,(int,float,complex,type(self),basestring)):
+        if op not in ops or not isinstance(other,(int,float,complex,type(self),str)):
             return NotImplemented
         else:
             obj = type(self)(self)
             if isinstance(other,(int,float,complex)):
                 obj.__expr.append(ExpressionValue(other))
             else:
-                if isinstance(other,basestring):
+                if isinstance(other,str):
                     try:
                         other = type(self)(other)
                     except:
@@ -450,7 +450,7 @@ class Expression( object ):
                 for v in other.__args:
                     if v not in obj.__args:
                         obj.__args.append(v)
-                for k,v in other.__vars.items():
+                for k,v in list(other.__vars.items()):
                     if k not in obj.__vars:
                         obj.__vars[k] = v
                     elif v != obj.__vars[k]:
@@ -460,14 +460,14 @@ class Expression( object ):
         return obj
 
     def __rcombine(self,other,op):
-        if op not in ops or not isinstance(other,(int,float,complex,type(self),basestring)):
+        if op not in ops or not isinstance(other,(int,float,complex,type(self),str)):
             return NotImplemented
         else:
             obj = type(self)(self)
             if isinstance(other,(int,float,complex)):
                 obj.__expr.insert(0,ExpressionValue(other))
             else:
-                if isinstance(other,basestring):
+                if isinstance(other,str):
                     try:
                         other = type(self)(other)
                     except:
@@ -479,7 +479,7 @@ class Expression( object ):
                     if v not in __args:
                         __args.append(v)
                 obj.__args = __args
-                for k,v in other.__vars.items():
+                for k,v in list(other.__vars.items()):
                     if k not in obj.__vars:
                         obj.__vars[k] = v
                     elif v != obj.__vars[k]:
@@ -489,14 +489,14 @@ class Expression( object ):
         return obj
 
     def __icombine(self,other,op):
-        if op not in ops or not isinstance(other,(int,float,complex,type(self),basestring)):
+        if op not in ops or not isinstance(other,(int,float,complex,type(self),str)):
             return NotImplemented
         else:
             obj = self
             if isinstance(other,(int,float,complex)):
                 obj.__expr.append(ExpressionValue(other))
             else:
-                if isinstance(other,basestring):
+                if isinstance(other,str):
                     try:
                         other = type(self)(other)
                     except:
@@ -506,7 +506,7 @@ class Expression( object ):
                 for v in other.__args:
                     if v not in obj.__args:
                         obj.__args.append(v)
-                for k,v in other.__vars.items():
+                for k,v in list(other.__vars.items()):
                     if k not in obj.__vars:
                         obj.__vars[k] = v
                     elif v != obj.__vars[k]:
@@ -784,9 +784,9 @@ gematch = re.compile('\s*(\))')
 
 def recalculateFMatch():
     global fmatch, omatch, umatch
-    fks = sorted(functions.keys(), key=len, reverse=True)
-    oks = sorted(ops.keys(), key=len, reverse=True)
-    uks = sorted(unary_ops.keys(), key=len, reverse=True)
+    fks = sorted(list(functions.keys()), key=len, reverse=True)
+    oks = sorted(list(ops.keys()), key=len, reverse=True)
+    uks = sorted(list(unary_ops.keys()), key=len, reverse=True)
     fmatch = re.compile('\s*(' + '|'.join(map(re.escape,fks)) + ')')
     omatch = re.compile('\s*(' + '|'.join(map(re.escape,oks)) + ')')
     umatch = re.compile('\s*(' + '|'.join(map(re.escape,uks)) + ')')

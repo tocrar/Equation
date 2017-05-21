@@ -13,7 +13,7 @@
 try:
     from Equation import core
 except ImportError:
-    import core
+    from . import core
 
 def addFn(id,str,latex,args,func):
     core.functions[id] = {

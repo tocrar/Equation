@@ -121,7 +121,7 @@ class TestHexEquation(unittest.TestCase):
         pass
 
     def testCall(self):
-        for n in xrange(-784323,294924,6831):
+        for n in range(-784323,294924,6831):
             if n < 0:
                 hexstr = hex(n)[3:]
                 prefix = "-0x"
@@ -143,7 +143,7 @@ class TestOctEquation(unittest.TestCase):
             l = 2
         else:
             l = 1
-        for n in xrange(-784323,294924,6831):
+        for n in range(-784323,294924,6831):
             if n < 0:
                 octstr = oct(n)[l+1:]
                 prefix = "-0o"
@@ -160,7 +160,7 @@ class TestBinEquation(unittest.TestCase):
         pass
 
     def testCall(self):
-        for n in xrange(-784323,294924,6831):
+        for n in range(-784323,294924,6831):
             if n < 0:
                 binstr = bin(n)[3:]
                 prefix = "-0b"

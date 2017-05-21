@@ -23,6 +23,7 @@ except ImportError:
 import operator as op
 from Equation.util import addOp, addFn, addConst, addUnaryOp
 from Equation.similar import sim, nsim, gsim, lsim
+from functools import reduce
 
 def equation_extend():
     def product(*args):

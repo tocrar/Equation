@@ -11,16 +11,16 @@ import h5py
 db = h5py.File("dataset.hdf5", "r") # External Data base of consts and values
 
 while True:
-    expr = raw_input("Enter Equation to Plot in terms of (x): ") # Fetch Equation From User Input
+    expr = input("Enter Equation to Plot in terms of (x): ") # Fetch Equation From User Input
 
     try:
         fn = Expression(expr,['x'])
     except SyntaxError as err:
-        print err.message
+        print(err.message)
         continue
 
     if 'x' not in fn: # check 'x' is used in expr
-        print "Error: Equation must have a variable named x"
+        print("Error: Equation must have a variable named x")
         continue
 
     for v in fn: # load all data values from db
@@ -34,7 +34,7 @@ while True:
             continue
         if v in constants:
             continue
-        print "Error: Variable '{0:s}' is not defined in database".format(v)
+        print("Error: Variable '{0:s}' is not defined in database".format(v))
         break # Break the For Loop
     else:
         break # Break the While Loop

@@ -522,6 +522,24 @@ class TestMeanEquation(unittest.TestCase):
         self.assertEqual(self.fn([1, 2, 3, 4, 5]), 3)
 
 
+class TestLogEquation(unittest.TestCase):
+    def setUp(self):
+        self.fn = Expression("log(x)")
+
+    def testCall(self):
+        self.assertEqual(self.fn(1), 0)
+        self.assertEqual(self.fn(2), 0.6931471805599453)
+
+
+class TestExpEquation(unittest.TestCase):
+    def setUp(self):
+        self.fn = Expression("exp(x)")
+
+    def testCall(self):
+        self.assertEqual(self.fn(0), 1)
+        self.assertEqual(self.fn(1), 2.718281828459045)
+
+
 class TestEqualsEquation(unittest.TestCase):
     def setUp(self):
         self.fn = Expression("x == y")

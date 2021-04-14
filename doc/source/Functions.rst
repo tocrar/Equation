@@ -90,6 +90,8 @@ Name      Operation                   Syntax        Display
 **re**    Real Component of A         ``re(A)``     :math:`\Re\left(A\right)`
 **im**    Imagery Component of A      ``im(A)``     :math:`\Im\left(A\right)`
 **sqrt**  Square root of A            ``sqrt(A)``   :math:`\sqrt{A}`
+**log**   Logarithm of A              ``log(A)``    :math:`\log\left(A\right)`
+**exp**   Exponential of A            ``exp(A)``    :math:`\exp\left(A\right)`
 **min**   Minimum of A                ``min(A)``    :math:`\min\left(A\right)`
 **max**   Maximum of A                ``max(A)``    :math:`\max\left(A\right)`
 **mean**  Mean of A                   ``mean(A)``   :math:`\text{mean}\left(A\right)`

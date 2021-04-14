@@ -100,11 +100,15 @@ def equation_extend():
         addFn('im', "re({0:s})", "\\Im\\left({0:s}\\right)", 1, np.imag)
         addFn('sqrt', "sqrt({0:s})", "\\sqrt{{{0:s}}}", 1, np.sqrt)
         addFn('mean', "mean({0:s})", "\\text{mean}\\left({0:s}\\right)", '+', np.mean)
+        addFn('log', "log({0:s})", "\\log{{{0:s}}}", 1, np.log)
+        addFn('exp', "exp({0:s})", "\\exp{{{0:s}}}", 1, np.exp)
         addConst("pi", np.pi)
         addConst("e", np.e)
         addConst("Inf", np.Inf)
         addConst("NaN", np.NaN)
     else:
+        def mean(args):
+            return float(sum(args)) / len(args)
         addFn('floor', "floor({0:s})", "\\lfloor {0:s} \\rfloor", 1, math.floor)
         addFn('ceil', "ceil({0:s})", "\\lceil {0:s} \\rceil", 1, math.ceil)
         addFn('round', "round({0:s})", "\\lfloor {0:s} \\rceil", 1, round)
@@ -114,11 +118,9 @@ def equation_extend():
         addFn('re', "re({0:s})", "\\Re\\left({0:s}\\right)", 1, complex.real)
         addFn('im', "re({0:s})", "\\Im\\left({0:s}\\right)", 1, complex.imag)
         addFn('sqrt', "sqrt({0:s})", "\\sqrt{{{0:s}}}", 1, math.sqrt)
-
-        def mean(args):
-            return float(sum(args)) / len(args)
-
         addFn('mean', "mean({0:s})", "\\text{mean}\\left({0:s}\\right)", '+', mean)
+        addFn('log', "log({0:s})", "\\log{{{0:s}}}", 1, math.log)
+        addFn('exp', "exp({0:s})", "\\exp{{{0:s}}}", 1, math.exp)
         addConst("pi", math.pi)
         addConst("e", math.e)
         addConst("Inf", float("Inf"))

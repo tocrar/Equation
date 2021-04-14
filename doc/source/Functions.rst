@@ -80,17 +80,22 @@ Functions
 
 These as normal functions a name followed by a list of parameters
 
-========= =========================== ============= ============================
+========= =========================== ============= ==================================
 Name      Operation                   Syntax        Display
-========= =========================== ============= ============================
+========= =========================== ============= ==================================
 **abs**   Absolute value of A         ``abs(A)``    :math:`\left|A\right|`
 **sin**   Sine value of A             ``sin(A)``    :math:`\sin\left(A\right)`
 **cos**   Cosine value of A           ``cos(A)``    :math:`\cos\left(A\right)`
 **tan**   Tangent value of A          ``tan(A)``    :math:`\tan\left(A\right)`
-**re**    Real Compoent of A          ``re(A)``     :math:`\Re\left(A\right)`
-**im**    Imagery Compoent of A       ``im(A)``     :math:`\Im\left(A\right)`
+**re**    Real Component of A         ``re(A)``     :math:`\Re\left(A\right)`
+**im**    Imagery Component of A      ``im(A)``     :math:`\Im\left(A\right)`
 **sqrt**  Square root of A            ``sqrt(A)``   :math:`\sqrt{A}`
-========= =========================== ============= ============================
+**min**   Minimum of A                ``min(A)``    :math:`\min\left(A\right)`
+**max**   Maximum of A                ``max(A)``    :math:`\max\left(A\right)`
+**mean**  Mean of A                   ``mean(A)``   :math:`\text{mean}\left(A\right)`
+**first** First element of A          ``first(A)``  :math:`\text{first}\left(A\right)`
+**last**  Last element of A           ``last(A)``   :math:`\text{last}\left(A\right)`
+========= =========================== ============= ==================================
 
 Examples
 --------

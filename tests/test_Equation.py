@@ -529,6 +529,15 @@ class TestLogEquation(unittest.TestCase):
     def testCall(self):
         self.assertEqual(self.fn(1), 0)
         self.assertEqual(self.fn(2), 0.6931471805599453)
+        
+
+class TestLogBaseEquation(unittest.TestCase):
+    def setUp(self):
+        self.fn = Expression("log(x,10)")
+
+    def testCall(self):
+        self.assertEqual(self.fn(10), 1)
+        self.assertEqual(self.fn(20), 1.301029995663981)
 
 
 class TestExpEquation(unittest.TestCase):

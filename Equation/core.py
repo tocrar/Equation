@@ -191,7 +191,7 @@ class Expression(object):
     Parameters
     ----------
     expression: str
-        String resprenstation of an equation
+        String representation of an equation
     argorder: list of str
         List of variable names, indicating the position of variable
         for mapping from positional arguments
@@ -214,6 +214,10 @@ class Expression(object):
             self.variables = {}  # call variables
             self.__compile()
             del self.__expression
+
+    @property
+    def variable_names(self) -> list:
+        return list(self.__argsused)
 
     def __getitem__(self, name):
         """fn[var]
@@ -639,7 +643,9 @@ class Expression(object):
     def __abs__(self):
         return self.__applycall('abs')
 
-    def __getfunction(self, op):
+    @staticmethod
+    def __getfunction(op):
+        fn = None
         if op[1] == 'FUNC':
             fn = functions[op[0]]
             fn['type'] = 'FUNC'

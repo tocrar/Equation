@@ -14,6 +14,10 @@ import math
 import re
 
 
+class ValidationError(Exception):
+    pass
+
+
 class ExpressionObject(object):
     def __init__(self, *args, **kwargs):
         super(ExpressionObject, self).__init__(*args, **kwargs)
@@ -206,6 +210,9 @@ class Expression(object):
             self.__expr = list(expression.__expr)
             self.variables = {}  # call variables
         else:
+            brackets = abs(expression.count("(") - expression.count(")"))
+            if brackets != 0:
+                raise ValidationError(f"expression has {brackets} open bracket{'s' if brackets != 1 else ''}")
             self.__expression = expression
             self.__args = argorder if argorder is not None else []
             self.__vars = {}  # internal array of preset variables
@@ -645,7 +652,6 @@ class Expression(object):
 
     @staticmethod
     def __getfunction(op):
-        fn = None
         if op[1] == 'FUNC':
             fn = functions[op[0]]
             fn['type'] = 'FUNC'

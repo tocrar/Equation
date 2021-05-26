@@ -109,6 +109,7 @@ def equation_extend():
     else:
         def mean(args):
             return float(sum(args)) / len(args)
+
         addFn('floor', "floor({0:s})", "\\lfloor {0:s} \\rfloor", 1, math.floor)
         addFn('ceil', "ceil({0:s})", "\\lceil {0:s} \\rceil", 1, math.ceil)
         addFn('round', "round({0:s})", "\\lfloor {0:s} \\rceil", 1, round)
